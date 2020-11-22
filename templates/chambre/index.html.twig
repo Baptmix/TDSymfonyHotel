@@ -1,53 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des chambres{% endblock %}
-
 {% block body %}
-    <div style="margin-top: 30px;"></div>
-    <div class="card border-primary mb-3">
-        <div class="card-header"><h2>Chambres</h2></div>
-        <div class="card-body">
-            <p>Voici la liste des chambres. Vous pouvez en ajouter une, les modifier ou les supprimer.</p>
+    {% if app.user %}
+        <div style="margin-top: 30px;"></div>
+        <div class="card border-primary mb-3">
+            <div class="card-header"><h2>Chambres</h2></div>
+            <div class="card-body">
+                <p>Voici la liste des chambres. Vous pouvez en ajouter une, les modifier ou les supprimer.</p>
+            </div>
         </div>
-    </div>
 
-    <a href="{{  path('chambre_create') }}"><button type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Ajouter une chambre</button></a>
-    <div style="margin-top: 30px;"></div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Étage</th>
-            <th scope="col">Numéro</th>
-            <th scope="col">Assignée à</th>
-            <th scope="col">Statut</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for chambre in chambres %}
+        <a href="{{ path('chambre_create') }}">
+            <button type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Ajouter une chambre
+            </button>
+        </a>
+        <div style="margin-top: 30px;"></div>
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <td>{{ chambre.etage }}</td>
-                <td>{{ chambre.numero }}</td>
-                <td>{{ chambre.assignedTo ? chambre.assignedTo.nom : "PERSONNE" }}</td>
-                <td>{{ chambre.statut.nom }}</td>
-                <td>
-                    <a href="{{ path('chambre_edit', {id: chambre.id})}}">
-                        <button type="button" class="btn btn-warning">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </a>
-                    <a href="{{ path('chambre_delete', {id: chambre.id})}}">
-                        <button type="button" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </a>
-                </td>
+                <th scope="col">Étage</th>
+                <th scope="col">Numéro</th>
+                <th scope="col">Assignée à</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Actions</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for chambre in chambres %}
+                <tr>
+                    <td>{{ chambre.etage }}</td>
+                    <td>{{ chambre.numero }}</td>
+                    <td>{{ chambre.assignedTo ? chambre.assignedTo.nom : "PERSONNE" }}</td>
+                    <td>{{ chambre.statut.nom }}</td>
+                    <td>
+                        <a href="{{ path('chambre_edit', {id: chambre.id}) }}">
+                            <button type="button" class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </a>
+                        <a href="{{ path('chambre_delete', {id: chambre.id}) }}">
+                            <button type="button" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
 
-
+    {% endif %}
 
 {% endblock %}
+

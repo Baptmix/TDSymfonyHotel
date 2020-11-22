@@ -3,10 +3,9 @@
 {% block title %}Éditer une chambre{% endblock %}
 
 {% block body %}
-
-
-    <div class="container">
-        {% include "chambre/form_chambre.html.twig" %}
-    </div>
-
+    {% if app.user %}
+        <div class="container">
+            {% include "chambre/form_chambre.html.twig" %}
+        </div>
+    {% endif %}
 {% endblock %}

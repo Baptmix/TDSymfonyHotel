@@ -3,47 +3,51 @@
 {% block title %}Liste des employés{% endblock %}
 
 {% block body %}
-    <div style="margin-top: 30px;"></div>
-    <div class="card border-primary mb-3">
-        <div class="card-header"><h2>Employés</h2></div>
-        <div class="card-body">
-            <p>Voici la liste des employés. Vous pouvez en ajouter un, les modifier ou les supprimer.</p>
+    {% if app.user %}
+        <div style="margin-top: 30px;"></div>
+        <div class="card border-primary mb-3">
+            <div class="card-header"><h2>Employés</h2></div>
+            <div class="card-body">
+                <p>Voici la liste des employés. Vous pouvez en ajouter un, les modifier ou les supprimer.</p>
+            </div>
         </div>
-    </div>
 
-    <a href="{{  path('employe_create') }}"><button type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Ajouter un employé</button></a>
-    <div style="margin-top: 30px;"></div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col"><strong>ID</strong></th>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col">Rôle</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for employe in employes %}
+        <a href="{{ path('employe_create') }}">
+            <button type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Ajouter un employé</button>
+        </a>
+        <div style="margin-top: 30px;"></div>
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <th scope="row">Employé {{ employe.id }}</th>
-                <td>{{ employe.nom }}</td>
-                <td>{{ employe.prenom }}</td>
-                <td>{{ employe.role.nom }}</td>
-                <td>
-                    <a href="{{ path('employe_edit', {id: employe.id})}}">
-                        <button type="button" class="btn btn-warning">
-                           <i class="fas fa-edit"></i>
-                        </button>
-                    </a>
-                    <a href="{{ path('employe_delete', {id: employe.id})}}">
-                        <button type="button" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </a>
-                </td>
+                <th scope="col"><strong>ID</strong></th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Rôle</th>
+                <th scope="col">Actions</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for employe in employes %}
+                <tr>
+                    <th scope="row">Employé {{ employe.id }}</th>
+                    <td>{{ employe.nom }}</td>
+                    <td>{{ employe.prenom }}</td>
+                    <td>{{ employe.role.nom }}</td>
+                    <td>
+                        <a href="{{ path('employe_edit', {id: employe.id}) }}">
+                            <button type="button" class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </a>
+                        <a href="{{ path('employe_delete', {id: employe.id}) }}">
+                            <button type="button" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
