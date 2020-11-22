@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}Authentification{% endblock %}
+{% block body %}
+    <div class="card border-warning mb-3">
+        <div class="card-header">Authentification</div>
+        <div class="card-body">
+            <form novalidate method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes authentifié en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </div>
+                {% endif %}
+                <div class="form-group" data-children-count="1">
+                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required autofocus>
+                </div>
+                <div class="form-group" data-children-count="1">
+                    <label for="password" class="col-sm-2 col-form-label">Mot de passe:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <input class="btn btn-success" type="submit" value="Se connecter">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
