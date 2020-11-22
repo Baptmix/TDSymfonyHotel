@@ -17,7 +17,7 @@ class EmployeType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('role', RoleChoiceType::class)
-            ->add('Sauvegarder', SubmitType::class)
+            ->add('sauvegarder', SubmitType::class)
         ;
     }
 

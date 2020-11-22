@@ -20,7 +20,7 @@ class ChambreType extends AbstractType
             ->add('etage')
             ->add('statut', StatutChoiceType::class)
             ->add('assignedTo', AssignatedToChoiceType::class)
-            ->add('Sauvegarder', SubmitType::class)
+            ->add('sauvegarder', SubmitType::class)
         ;
     }
 

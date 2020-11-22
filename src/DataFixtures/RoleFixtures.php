@@ -10,7 +10,7 @@ class RoleFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        foreach (['manager', "employe"] as $role){
+        foreach (['Manager', "Employé"] as $role){
             $roleEntity = new Role();
             $manager->persist($roleEntity->setNom($role));
         }

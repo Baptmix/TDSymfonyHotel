@@ -1,0 +1,24 @@
+<div class="card border-primary mb-3" style="margin-top: 30px">
+    <div class="card-header">Gestion employé</div>
+    <div class="card-header">
+{{ form_start(formEmploye) }}
+    <fieldset>
+        <div class="form-group row">
+            <label for="numero" class="col-sm-2 col-form-label">Nom :</label>
+            {{ form_widget(formEmploye.nom, {'attr': {'placeholder': 'Nom'}}) }}
+    </div>
+        <div class="form-group row">
+            <label for="etage" class="col-sm-2 col-form-label">Prénom :</label>
+            {{ form_widget(formEmploye.prenom, {'attr': {'placeholder': 'Prénom'}}) }}
+        </div>
+        <div class="form-group row">
+            <label for="statut" class="col-sm-2 col-form-label">Rôle :</label>
+            {{ form_widget(formEmploye.role, {'attr': {'placeholder': 'Rôle'}}) }}
+        </div>
+    <div class="">
+        {{ form_widget(formEmploye.sauvegarder, {'attr': {'value': 'Enregistrer', 'class': 'btn btn-success'}}) }}
+    </div>
+    </fieldset>
+{{ form_end(formEmploye) }}
+    </div>
+</div>

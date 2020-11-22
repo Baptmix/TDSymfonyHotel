@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Authentification{% endblock %}
 {% block body %}
-    <div class="card border-warning mb-3">
+    <div class="card border-warning mb-3" style="margin-top: 30px">
         <div class="card-header">Authentification</div>
         <div class="card-body">
             <form novalidate method="post">
@@ -10,8 +10,13 @@
                 {% endif %}
 
                 {% if app.user %}
-                    <div class="mb-3">
-                        Vous êtes authentifié en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+
+                    <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Déconnexion</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Vous êtes authentifié en tant que {{ app.user.username }}</h4>
+                            <p class="card-text"><a href="{{ path('app_logout') }}"><button type="button" class="btn btn-secondary">Déconnexion</button></a></p>
+                        </div>
                     </div>
                 {% endif %}
                 <div class="form-group" data-children-count="1">
