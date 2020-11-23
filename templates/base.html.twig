@@ -33,16 +33,25 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('chambre')}}">Chambres</a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('employe')}}">Employés</a>
             </li>
+                {% endif %}
             {% endif %}
 
         </ul>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <span class="badge badge-pill badge-success" style="margin-right: 30px">MANAGER</span>
+        {% endif %}
+        {% if is_granted('ROLE_USER')%}
+            <span class="badge badge-pill badge-warning" style="margin-right: 30px">EMPLOYÉ</span>
+        {% endif %}
         {% if app.user %}
-        <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-primary" style="position: absolute; right: 20px; top: 5px">Déconnexion</button></a>
+        <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-primary">Déconnexion</button></a>
         {% else %}
-        <a href="{{ path('app_login') }}"><button type="button" class="btn btn-primary" style="position: absolute; right: 20px; top: 5px">Connexion</button></a>
+        <a href="{{ path('app_login') }}"><button type="button" class="btn btn-primary">Connexion</button></a>
         {% endif %}
     </div>
 </nav>

@@ -24,5 +24,12 @@ class UserFixtures extends Fixture
 
         $manager->persist($user);
         $manager->flush();
+
+        $user1 = new User();
+        $user1->setEmail('manager@hotel.fr');
+        $user1->setPassword($this->passwordEncoder->encodePassword($user1, 'manager'));
+
+        $manager->persist($user);
+        $manager->flush();
     }
 }
