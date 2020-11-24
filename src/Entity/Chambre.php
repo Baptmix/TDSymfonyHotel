@@ -34,7 +34,7 @@ class Chambre
     private $statut;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Employe::class)
+     * @ORM\ManyToOne(targetEntity=User::class)
      */
     private $assignedTo;
 
@@ -79,12 +79,12 @@ class Chambre
         return $this;
     }
 
-    public function getAssignedTo(): ?Employe
+    public function getAssignedTo(): ?User
     {
         return $this->assignedTo;
     }
 
-    public function setAssignedTo(?Employe $assignedTo): self
+    public function setAssignedTo(?User $assignedTo): self
     {
         $this->assignedTo = $assignedTo;
 

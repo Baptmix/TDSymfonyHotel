@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Employe;
+use App\Entity\User;
 use App\Form\EmployeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class EmployeController extends AbstractController
 {
@@ -16,7 +17,7 @@ class EmployeController extends AbstractController
      */
     public function index(): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Employe::class);
+        $repo = $this->getDoctrine()->getRepository(User::class);
         $employes = $repo->findAll();
 
         return $this->render('employe/index.html.twig', [
@@ -25,37 +26,41 @@ class EmployeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/employe/new", name="employe_create")
-     */
-    public function create(Request $request) {
-        // Manager Doctrine ORM
-        $entityManager = $this->getDoctrine()->getManager();
-
-        // Création formulaire
-        $form = $this->createForm(EmployeType::class);
-        // Récupérer les données du formulaire
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $formData = $form->getData();
-            $employe = new Employe();
-            $employe->setNom($formData->getNom());
-            $employe->setPrenom($formData->getPrenom());
-            $employe->setRole($formData->getRole());
-
-            // Persistance des données de la chambre
-            $entityManager->persist($employe);
-            $entityManager->flush();
-            // Redirection vers une route
-            return $this->redirectToRoute('employe');
-        }
-
-
-        return $this->render('employe/create.html.twig', [
-            'formEmploye' => $form->createView()
-        ]);
-    }
+//    /**
+//     * @Route("/employe/new", name="employe_create")
+//     */
+//    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
+//        // Manager Doctrine ORM
+//        $entityManager = $this->getDoctrine()->getManager();
+//
+//        // Création formulaire
+//        $form = $this->createForm(EmployeType::class);
+//        // Récupérer les données du formulaire
+//        $form->handleRequest($request);
+//
+//        if($form->isSubmitted() && $form->isValid()) {
+//            $formData = $form->getData();
+//            $employe = new User();
+//            $employe->setNom($formData->getNom());
+//            $employe->setPrenom($formData->getPrenom());
+//            $employe->setPrenom($formData->getEmail());
+//            $password = $passwordEncoder->encodePassword($employe, $formData->getPassword());
+//            $employe->setPrenom($password);
+//            $employe->setRoles($formData->getRoles());
+//            $employe->setRole($formData->getRole());
+//
+//            // Persistance des données de la chambre
+//            $entityManager->persist($employe);
+//            $entityManager->flush();
+//            // Redirection vers une route
+//            return $this->redirectToRoute('employe');
+//        }
+//
+//
+//        return $this->render('employe/create.html.twig', [
+//            'formEmploye' => $form->createView()
+//        ]);
+//    }
 
 
     /**

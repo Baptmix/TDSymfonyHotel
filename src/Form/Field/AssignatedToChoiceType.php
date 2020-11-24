@@ -11,7 +11,7 @@ class AssignatedToChoiceType extends EntityType
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults([
-            'class' => \App\Entity\Employe::class,
+            'class' => \App\Entity\User::class,
             'multiple' => false,
             'choice_label' => 'nom',
         ]);

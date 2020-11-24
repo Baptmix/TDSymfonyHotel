@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Statut;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class StatutFixtures extends Fixture
